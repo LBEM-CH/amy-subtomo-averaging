@@ -51,7 +51,7 @@ if __name__ == "__main__":
         help='Distance (in angs) between 2 neigboring boxes (interbox distance) used to calculate _rlnHelicalTrackLengthAngst'
     )
     args = parser.parse_args()
-    header,df = read_star(args.input)
+    (header,), (df,) = read_star(args.input)
     df['_rlnHelicalTrackLengthAngst'] = create_rlnHelicalTrackLengthAngst(df['_rlnHelicalTubeID'], float(args.distance))
     write_star(args.output,header,df)
     print(f"Updated STAR file with _rlnHelicalTrackLengthAngst written to {args.output}")

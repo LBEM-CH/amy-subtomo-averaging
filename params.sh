@@ -2,7 +2,7 @@
 
 ### PARAMETERS ###
 
-TOMONAME=Position_60_3
+TOMONAME=Position_94_3
 ROOT=/mnt/storage/data/users/lukas/20251127_MSA_liftout/Session1/msa_human/20251127_lift_out/$TOMONAME
 #ROOT=/mnt/storage/data/users/lukas/20251127_MSA_liftout/Session2/Titan3_EPFL_LBEM_Lukas2_20251210/msa_human/20251127_lift_out/$TOMONAME
 REPOSITORY=/mnt/storage/data/users/lukas/subtomo-averaging
@@ -20,6 +20,7 @@ MOTIONCOR_EXECUTABLE=/programs/x86_64-linux/system/sbgrid_bin/MotionCor2_1.6.4_C
 
 ANGPIX_BIN2=$(echo "$ANGPIX * 2" | bc)
 ANGPIX_BIN4=$(echo "$ANGPIX * 4" | bc)
+ANGPIX_BIN8=$(echo "$ANGPIX * 8" | bc)
 ANGPIX_REC=$(echo "$ANGPIX * $RECBINNING" | bc)
 
 echo "TOMONAME: $TOMONAME"
@@ -36,4 +37,5 @@ echo "TOMOSIZEZ: $TOMOSIZEZ"
 echo "MOTIONCOR_EXECUTABLE: $MOTIONCOR_EXECUTABLE"
 echo "ANGPIX_BIN2: $ANGPIX_BIN2"
 echo "ANGPIX_BIN4: $ANGPIX_BIN4"
+echo "ANGPIX_BIN8: $ANGPIX_BIN8"
 echo "ANGPIX_REC: $ANGPIX_REC"

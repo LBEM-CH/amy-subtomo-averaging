@@ -5,13 +5,11 @@ def read_star(file_path):
     """
     Reads a STAR file (relion3/4/5 format).
 
-    For files with a single data_ block (relion3/4), returns:
-        header: list of strings (lines up to and including 'loop_')
-        df: DataFrame with column names from the STAR file
-
-    For files with multiple data_ blocks (relion5), returns:
-        headers: list of N headers (each a list of strings)
+    Always returns:
+        headers: list of N headers (each a list of strings, up to and including 'loop_')
         dfs: list of N DataFrames
+
+    Single-block files (relion3/4) return length-1 lists.
     """
     with open(file_path, 'r') as f:
         all_lines = f.readlines()
@@ -86,10 +84,6 @@ def read_star(file_path):
 
         headers.append(header)
         dfs.append(df)
-
-    # Single block: return header and df directly (backward compatible)
-    if len(headers) == 1:
-        return headers[0], dfs[0]
 
     return headers, dfs
 

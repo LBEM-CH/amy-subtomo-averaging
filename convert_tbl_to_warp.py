@@ -50,8 +50,8 @@ if __name__ == "__main__":
     # warp_rest_naming = os.path.join(tomo_root_path,'relion3_b8/particles_new_select.star')
     output_star = os.path.join(tomo_root_path, args.o)
 
-    star_dyn_header, star_dyn_df = read_star(star_dyn_path)
-    _, star_ref_df = read_star(star_ref_path)
+    (star_dyn_header,), (star_dyn_df,) = read_star(star_dyn_path)
+    _, (star_ref_df,) = read_star(star_ref_path)
     #_, warp_helical_df = read_star(warp_helical)
     particle_mask = (par_table[:, 0].astype(int)) - 1
     star_dyn_df["_rlnCoordinateX"] = star_dyn_df["_rlnCoordinateX"].astype(float)*binning

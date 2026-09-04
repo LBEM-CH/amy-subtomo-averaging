@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     # ------------ pre-processing (single-thread) --------------------------------- might change!!
     print(f'Reading STAR file: {warp_file}')
-    _, warp_df = read_star(warp_file)
+    _, (warp_df,) = read_star(warp_file)
     
     # Read pixel size from star file
     pixel_size = float(warp_df['_rlnPixelSize'].iloc[0])

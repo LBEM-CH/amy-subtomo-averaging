@@ -78,7 +78,7 @@ def edit_dynamo_tbl(dynamo_output, merged_star_file, min_tilt, max_tilt):
     print(f"\nReading {tbl_file}...")
     
     # Parse merged star file to get HelicalTubeID values
-    _, star_df = read_star(merged_star_file)
+    _, (star_df,) = read_star(merged_star_file)
     
     if '_rlnHelicalTubeID' not in star_df.columns:
         print(f"ERROR: _rlnHelicalTubeID not found in {merged_star_file}")
@@ -147,9 +147,9 @@ def merge_star_files(left_file, right_file, output_file, bin_left=8, bin_right=1
     A new _rlnAngleRot column is appended.
     """
     print(f"Reading {left_file}...")
-    _, left_df = read_star(left_file)
+    _, (left_df,) = read_star(left_file)
     print(f"Reading {right_file}...")
-    _, right_df = read_star(right_file)
+    _, (right_df,) = read_star(right_file)
     print(f"Left file has {len(left_df)} particles")
     print(f"Right file has {len(right_df)} particles")
 
