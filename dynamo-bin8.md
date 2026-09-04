@@ -66,7 +66,7 @@ layout: default
     This will take a few minutes with 54 processes.
     
 
-## Average tube at bin 8
+## Initial average at bin 8
 
 5. Move into ```warp/dynamo``` and create a project directory called ```dynamo_project_b8```:
 
@@ -148,7 +148,7 @@ layout: default
     | iterations                | 2          | 2         |
     | cone aperture             | 20         | 20         |
     | cone sampling             | 3          | 3          |
-    | **Advanced:** cone flip   | 2          | 2          |
+    | **Advanced:** cone flip   | 1          | 1          |
     | azymuth rotation angle    | 360        | 45          |
     | azymuth rotation sampling | 15         | 5          |
     | refine                    | 2          | 2          |
@@ -196,16 +196,32 @@ layout: default
     ```
     ```bash
     # Set pixel size
-    relion_image_handler --i average_ref_001_ite_0004.mrc --o average_ref_001_ite_0004.mrc --force_header_angpix 15.84
+    relion_image_handler --i average_ref_001_ite_0004.mrc --o average_ref_001_ite_0004.mrc --force_header_angpix $ANGPIX_BIN8
     ```
-    ```bash
-    # Search symmetry in Relion
-    relion_helix_toolbox --i average_ref_001_ite_0004.mrc --twist_min 0.5 --twist_max 2 --rise_min 4.5 --rise_max 4.9 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix 15.84
-    ```
-    ```bash
-    # Impose symmetry to the average (change twist and rise to the optimal values from previous command)
-    relion_helix_toolbox --i average_ref_001_ite_0004.mrc --twist 1.01 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 200 --angpix 15.84 --o average_ref_001_ite_0004_sym.mrc
-    ```
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist min (°) <input type="number" class="helix-twist-min" step="0.01" value="0.5"></label>
+        <label>Twist max (°) <input type="number" class="helix-twist-max" step="0.01" value="2"></label>
+        <label>Rise min (Å) <input type="number" class="helix-rise-min" step="0.01" value="4.5"></label>
+        <label>Rise max (Å) <input type="number" class="helix-rise-max" step="0.01" value="4.9"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="200"></label>
+        <button class="helix-btn" onclick="updateHelixSearchCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-search-cmd"># Search symmetry in Relion
+relion_helix_toolbox --i average_ref_001_ite_0004.mrc --twist_min 0.5 --twist_max 2 --rise_min 4.5 --rise_max 4.9 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN8</code></pre>
+    </div>
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist (°) <input type="number" class="helix-twist" step="0.01" value="1.01"></label>
+        <label>Rise (Å) <input type="number" class="helix-rise" step="0.01" value="4.8"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="200"></label>
+        <button class="helix-btn" onclick="updateHelixCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-cmd"># Impose symmetry
+relion_helix_toolbox --i average_ref_001_ite_0004.mrc --twist 1.01 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 200 --angpix $ANGPIX_BIN8 --o average_ref_001_ite_0004_sym.mrc</code></pre>
+    </div>
     ```bash
     # Set pixel size back to 1 for Dynamo
     relion_image_handler --i average_ref_001_ite_0004_sym.mrc --o average_ref_001_ite_0004_sym.mrc --force_header_angpix 1
@@ -250,10 +266,10 @@ layout: default
     | cone aperture                 | 20         |
     | cone sampling                 | 3          |
     | **Advanced:** cone flip       | 2          |
-    | azymuth rotation angle        | 20        |
-    | azymuth rotation sampling     | 3         |
+    | azymuth rotation angle        | 180        |
+    | azymuth rotation sampling     | 15         |
     | **Advanced:** azymuth flip    | 2          |
-    | refine                        | 2          |
+    | refine                        | 3          |
     | refine factor                 | 2          |
     | high pass                     | 2          |
     | low                           | 25         |

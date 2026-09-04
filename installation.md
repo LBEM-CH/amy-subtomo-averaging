@@ -20,7 +20,7 @@ We managed all below softare through  SBGrid (see documentation [here](https://s
 - EMAN2 == 2.99.66 
 - MotionCor2 == 1.6.4 
 - OpenMPI == 2.1.2 
-- PEET == 1.17.0 
+- PEET == 1.17.0 N
 - Warp == 2.0.0dev34 
 - AreTomo2 == 1.1.2 
 

@@ -6,6 +6,7 @@ layout: default
 
 1. From the .tbl files of the 2 half-steps in the previous step, generate a .star file:
     ```shell
+    conda activate tomotools
     python convert_tbl_to_warp.py \
     -r $ROOT/warp \
     -t1 dynamo/dynamo_project_b4/abp_align_eo/results/ite_0004/averages/refined_table_ref_001_ite_0004.tbl \
@@ -22,8 +23,7 @@ layout: default
 2. Use this star file to re-extract particles with warp:
 
     ```shell
-    # Compute angpix binned by 4 and box diameter (floor)
-    ANGPIX_BIN4=$(echo "$ANGPIX * 4" | bc)
+    # Compute box diameter (floor)
     BOXDIM=$(awk "BEGIN { print int($ANGPIX_BIN4 * $BOXSIZE) }")
     # Export particles
     cd $ROOT/warp
@@ -60,13 +60,35 @@ First, convert one of the halfmaps to an mrc file:
     ANGPIX_BIN4=$(echo "$ANGPIX * 4" | bc)
     e2proc3d.py --mult=-1 dynamo/dynamo_project_b4/abp_align_eo/results/ite_0004/averages/average_ref_001_ite_0004.em dynamo_bin4_ite4.mrc
     relion_image_handler --i dynamo_bin4_ite4.mrc --o dynamo_bin4_ite4.mrc --force_header_angpix $ANGPIX_BIN4
-    relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN4
     ```
+
+    Then, search the symmetry:
+
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist min (°) <input type="number" class="helix-twist-min" step="0.01" value="1"></label>
+        <label>Twist max (°) <input type="number" class="helix-twist-max" step="0.01" value="1.9"></label>
+        <label>Rise min (Å) <input type="number" class="helix-rise-min" step="0.01" value="4.6"></label>
+        <label>Rise max (Å) <input type="number" class="helix-rise-max" step="0.01" value="4.8"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="200"></label>
+        <button class="helix-btn" onclick="updateHelixSearchCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-search-cmd">relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN4</code></pre>
+    </div>
     Below, set the twist and rise to the optima found above:
-    ```shell
-    # Apply symmetry
-    relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist 1.09 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 160 --angpix $ANGPIX_BIN4 --o dynamo_bin4_ite4_sym.mrc
-    ```
+
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist (°) <input type="number" class="helix-twist" step="0.01" value="1.09"></label>
+        <label>Rise (Å) <input type="number" class="helix-rise" step="0.01" value="4.8"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="180"></label>
+        <button class="helix-btn" onclick="updateHelixCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-cmd"># Apply symmetry
+relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist 1.09 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 180 --angpix $ANGPIX_BIN4 --o dynamo_bin4_ite4_sym.mrc</code></pre>
+    </div>
     The output is already at bin4.
 
 # Extract particles at bin2
@@ -74,8 +96,7 @@ First, convert one of the halfmaps to an mrc file:
 2. Use this star file to re-extract particles with warp:
 
     ```shell
-    # Compute angpix binned by 2 and box diameter (floor)
-    ANGPIX_BIN2=$(echo "$ANGPIX * 2" | bc)
+    # Compute box diameter (floor)
     BOXDIM=$(awk "BEGIN { print int($ANGPIX_BIN2 * $BOXSIZE) }")
     # Export particles
     cd $ROOT/warp
@@ -111,13 +132,33 @@ First, convert one of the halfmaps to an mrc file:
     ANGPIX_BIN2=$(echo "$ANGPIX * 2" | bc)
     e2proc3d.py --mult=-1 dynamo/dynamo_project_b4/abp_align_eo/results/ite_0004/averages/average_ref_001_ite_0004.em dynamo_bin4_ite4.mrc
     relion_image_handler --i dynamo_bin4_ite4.mrc --o dynamo_bin4_ite4.mrc --force_header_angpix $ANGPIX_BIN4
-    relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN4
     ```
+
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist min (°) <input type="number" class="helix-twist-min" step="0.01" value="1"></label>
+        <label>Twist max (°) <input type="number" class="helix-twist-max" step="0.01" value="1.9"></label>
+        <label>Rise min (Å) <input type="number" class="helix-rise-min" step="0.01" value="4.6"></label>
+        <label>Rise max (Å) <input type="number" class="helix-rise-max" step="0.01" value="4.8"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="200"></label>
+        <button class="helix-btn" onclick="updateHelixSearchCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-search-cmd">relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN4</code></pre>
+    </div>
     Below, set the twist and rise to the optima found above:
-    ```shell
-    # Apply symmetry
-    relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist 1.09 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 160 --angpix $ANGPIX_BIN4 --o dynamo_bin4_ite4_sym.mrc
-    ```
+
+    <div class="helix-widget">
+      <div class="helix-inputs">
+        <label>Twist (°) <input type="number" class="helix-twist" step="0.01" value="1.09"></label>
+        <label>Rise (Å) <input type="number" class="helix-rise" step="0.01" value="4.8"></label>
+        <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+        <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="180"></label>
+        <button class="helix-btn" onclick="updateHelixCmd(this)">Generate command</button>
+      </div>
+      <pre class="highlight"><code class="language-shell helix-cmd"># Apply symmetry
+relion_helix_toolbox --i dynamo_bin4_ite4.mrc --twist 1.09 --rise 4.8 --z_percentage 0.3 --impose --cyl_outer_diameter 180 --angpix $ANGPIX_BIN4 --o dynamo_bin4_ite4_sym.mrc</code></pre>
+    </div>
     ```shell
     # Rescale to the new pixel size
     relion_image_handler --i dynamo_bin4_ite4_sym.mrc --o relion5_b2/dynamo_bin2_ite4_sym_box$BOXSIZE.mrc --angpix $ANGPIX_BIN4 --rescale_angpix $ANGPIX_BIN2 --new_box $BOXSIZE --force_header_angpix $ANGPIX_BIN2

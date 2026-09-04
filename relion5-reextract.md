@@ -42,9 +42,18 @@ cd $ROOT/warp
 relion_image_handler --i relion5_b4/Refine3D/job005/run_class001.mrc --o relion5_b4/Refine3D_job005_bin2.mrc --angpix $ANGPIX_BIN4 --rescale_angpix $ANGPIX_BIN2 --new_box $BOXSIZE --force_header_angpix $ANGPIX_BIN2
 ```
 It might be useful to search for symmetry and apply it:
-```shell
- relion_helix_toolbox --i relion5_b4/Refine3D_job005_bin2.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN2
-```
+<div class="helix-widget">
+  <div class="helix-inputs">
+    <label>Twist min (°) <input type="number" class="helix-twist-min" step="0.01" value="1"></label>
+    <label>Twist max (°) <input type="number" class="helix-twist-max" step="0.01" value="1.9"></label>
+    <label>Rise min (Å) <input type="number" class="helix-rise-min" step="0.01" value="4.6"></label>
+    <label>Rise max (Å) <input type="number" class="helix-rise-max" step="0.01" value="4.8"></label>
+    <label>z% <input type="number" class="helix-zpct" step="0.01" value="0.3"></label>
+    <label>Outer diam. (Å) <input type="number" class="helix-diam" step="1" value="200"></label>
+    <button class="helix-btn" onclick="updateHelixSearchCmd(this)">Generate command</button>
+  </div>
+  <pre class="highlight"><code class="language-shell helix-search-cmd">relion_helix_toolbox --i relion5_b4/Refine3D_job005_bin2.mrc --twist_min 1 --twist_max 1.9 --rise_min 4.6 --rise_max 4.8 --z_percentage 0.3 --search --cyl_outer_diameter 200 --angpix $ANGPIX_BIN2</code></pre>
+</div>
 Set the rise and twist to the optima:
 ```shell
  # Apply symmetry
