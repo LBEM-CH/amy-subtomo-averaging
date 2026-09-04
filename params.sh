@@ -3,9 +3,8 @@
 ### PARAMETERS ###
 
 TOMONAME=Position_94_3
-ROOT=/mnt/storage/data/users/lukas/20251127_MSA_liftout/Session1/msa_human/20251127_lift_out/$TOMONAME
-#ROOT=/mnt/storage/data/users/lukas/20251127_MSA_liftout/Session2/Titan3_EPFL_LBEM_Lukas2_20251210/msa_human/20251127_lift_out/$TOMONAME
-REPOSITORY=/mnt/storage/data/users/lukas/subtomo-averaging
+ROOT=/path/to/$TOMONAME
+REPOSITORY=/path/to/subtomo-averaging
 ANGPIX=1.98             # pixel size in Angs. Make sure it is a float, e.g. 2.00 (not 2)
 MAGNIFICATION=64000     # nominal magnification
 FRAMEEXPOSURE=3.4       # exposure per frame in e/A2
