@@ -2,7 +2,9 @@
 layout: default
 ---
 
-# Subtomo averaging
+<video src="imgs/cryoET-on-brain-v01-50MB.mp4" controls autoplay loop muted playsinline width="100%"></video>
+
+# Index
 
 1. [Installation](installation.html)
 2. [Session setup](session-setup.html)
