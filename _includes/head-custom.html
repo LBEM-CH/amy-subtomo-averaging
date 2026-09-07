@@ -3,10 +3,20 @@
     position: relative;
     display: block;
   }
-  .copy-btn {
+  .code-btn-group {
     position: absolute;
     top: 6px;
     right: 6px;
+    display: flex;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .copy-btn-wrapper:hover .code-btn-group,
+  .code-btn-group.editing {
+    opacity: 1;
+  }
+  .code-btn {
     padding: 3px 9px;
     font-size: 12px;
     cursor: pointer;
@@ -14,14 +24,10 @@
     color: #e8e8e8;
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.15s, background 0.15s;
+    transition: background 0.15s;
     line-height: 1.5;
   }
-  .copy-btn-wrapper:hover .copy-btn {
-    opacity: 1;
-  }
-  .copy-btn:hover {
+  .code-btn:hover {
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     border-color: rgba(255, 255, 255, 0.7);
@@ -31,70 +37,16 @@
     color: #fff;
     border-color: rgba(100, 220, 120, 0.8);
   }
+  .edit-btn.editing {
+    background: rgba(21, 120, 120, 0.85);
+    color: #fff;
+    border-color: rgba(60, 180, 180, 0.9);
+  }
+  pre code[contenteditable="true"] {
+    outline: none;
+  }
 </style>
 <script src="{{ '/assets/js/copy-code.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/helix-widget.js' | relative_url }}" defer></script>
-
-<style>
-  /* Helical symmetry widget */
-  .helix-widget {
-    margin: 0.75rem 0;
-  }
-
-  .helix-inputs {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    padding: 0.55rem 0.8rem;
-    background: #f4f6f8;
-    border: 1px solid #dce6f0;
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    font-size: 0.9rem;
-    font-family: "Open Sans", sans-serif;
-  }
-
-  .helix-inputs label {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: #606c71;
-  }
-
-  .helix-inputs input[type="number"] {
-    width: 75px;
-    padding: 0.2rem 0.35rem;
-    border: 1px solid #c8d0d8;
-    border-radius: 3px;
-    font-size: 0.9rem;
-  }
-
-  .helix-btn {
-    padding: 0.25rem 0.75rem;
-    background: #157878;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.15s;
-  }
-
-  .helix-btn:hover {
-    background: #0e5f5f;
-  }
-
-  /* Remove top border-radius from the code block to connect it to the inputs */
-  .helix-widget pre,
-  .helix-widget .copy-btn-wrapper {
-    margin-top: 0 !important;
-  }
-
-  .helix-widget pre {
-    border-radius: 0 0 4px 4px;
-  }
-</style>
 
 <style>
   /* Sidebar layout */
