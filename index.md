@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<video src="imgs/cryoET-on-brain-v01-50MB.mp4" controls autoplay loop muted playsinline width="100%"></video>
+<video src="imgs/cryoET-on-brain-v02-50MB.mp4" controls autoplay loop muted playsinline width="100%"></video>
 
 # Index
 
