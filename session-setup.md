@@ -33,7 +33,8 @@ First, we found it useful to generate seperate folders for each position, and mo
   ./move_eer_frames.sh 2_3
   ```
 
-  ## Data organisation
+## Data organisation
+
 After executing the above bash script, the folder for each individual tomogram is as follows:
 
 ```bash
@@ -51,7 +52,7 @@ We assume this data organisation throughout the rest of the tutorial.
 
 **All subsequent steps will show the processing of only a single position.**
 
-  ## Session setup with shell variables
+## Session setup with shell variables
 
 To run all upcoming command-line steps smoothly, it is useful to setup a parameters file that contains some specifications of where your data is stored. Fill these parameters by editing the file ```params.sh```:
 
@@ -76,8 +77,6 @@ Then store these parameters as shell variables by sourcing this file:
 source params.sh
 ```
 Note: you will have to repeat that command every time you open a new terminal and continue with the analysis!
-
-
 
 
 
